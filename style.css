@@ -1,0 +1,49 @@
+* 
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+.card-container
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card
+{
+    position: relative;
+    width: 10vw;
+    height: 15vw;
+    margin: 1vw;
+}
+
+.card > img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.selected
+{
+    outline: 2px solid red;
+    box-shadow: 2px 2px 6px gray;
+    transform: scale(1.1);
+}
+
+.invisibile-submit
+{
+    position: absolute;
+    left: 0;
+    opacity: 10%;
+    width: 10vw;
+    height: 15vw;
+}
