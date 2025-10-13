@@ -23,14 +23,19 @@ class Player
         $this->scores = $scores;
     }
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     public function create(string $login = '', string $password = '', string $name = ''): Player | bool
     {
         $conn = Connection::getConnection();
         $sql = "INSERT INTO players (login, password, name) VALUES (:login, :password, :name)";
         $stmt = $conn->prepare($sql);
         $pw_hash = password_hash($password, PASSWORD_DEFAULT);
-        echo ($pw_hash);
-        echo (password_hash($password, PASSWORD_DEFAULT));
+        //echo ($pw_hash);
+        //echo (password_hash($password, PASSWORD_DEFAULT));
         try {
             $stmt->execute([
                 ":login" => $login,
@@ -61,22 +66,34 @@ class Player
         }
     }
 
+    public function create_score() {}
+
     public static function getHighScores(int $nb_cards): string
     {
         $conn = Connection::getConnection();
-        $sql = "SELECT * FROM scores LIMIT 10 ORDER BY score DESC";
+        $sql = "SELECT * FROM scores ORDER BY score ASC LIMIT 10";
         $stmt = $conn->prepare($sql);
-        $stmt->execute();
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return "";
+        }
         $res = $stmt->fetchAll();
+
 
         $table = "<table><thead><tr><th>Joueur</th><th>Actions</th><th>Temps</th><th>Nb Pairs</th></tr></thead><tbody>";
         foreach ($res as $score) {
-            $table .= "<tr>" . $score['player'] . "</tr>";
-            $table .= "<tr>" . $score['score'] . "</tr>";
-            $table .= "<tr>" . $score['completion_time'] . "</tr>";
-            $table .= "<tr>" . $score['number_of_pairs'] . "</tr>";
+            //var_dump($score);
+            $table .= "<tr>";
+            $table .= "<td>" . $score['player_id'] . "</td>";
+            $table .= "<td>" . $score['score'] . "</td>";
+            $table .= "<td>" . $score['completion_time'] . "</td>";
+            $table .= "<td>" . $score['number_of_pairs'] . "</td>";
+            $table .= "</tr>";
         }
         $table .= "</tbody></table>";
+        //$table = htmlentities($table);
         return $table;
     }
 }

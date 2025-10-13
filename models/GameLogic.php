@@ -34,8 +34,8 @@ class GameLogic
 
     public function checkPair(int $card_index): void
     {
-        var_dump($this->card_list[$card_index]->getId());
-        var_dump($this->card_list[$this->card_selected]->getId());
+        //var_dump($this->card_list[$card_index]->getId());
+        //var_dump($this->card_list[$this->card_selected]->getId());
         if ($this->card_list[$card_index]->getId() === $this->card_list[$this->card_selected]->getId()) {
             $this->card_list[$card_index]->setVisibility(true);
             $this->card_list[$this->card_selected]->setVisibility(true);
@@ -49,14 +49,27 @@ class GameLogic
 
     public function checkVictory(): bool
     {
-        $victory = true;
         foreach ($this->card_list as $card) {
             if ($card->getVisibility() === false) {
-                $victory = false;
-                break;
+
+                return false;
             }
         }
-        return $victory;
+        $this->createScore();
+        return true;
+    }
+
+    public function createScore(): void
+    {
+        $conn = Connection::getConnection();
+        $sql = "INSERT INTO scores (player_id,score,completion_time,number_of_pairs) VALUES (:player_id,:score,:completion_time,:number_of_pairs)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            ":player_id" => $this->player->getId(),
+            ":score" => $this->moves,
+            ":completion_time" => $this->getGameTime(),
+            ":number_of_pairs" => count($this->card_list) / 2,
+        ]);
     }
 
     public function getCardList(): array

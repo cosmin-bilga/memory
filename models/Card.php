@@ -79,9 +79,9 @@ class Card
     {
         $card_list = [];
         for ($i = 1; $i <= 6; $i++) {
-            $new_card = new Card("$i.jpg", "$i", $i);
+            $new_card = new Card("$i.png", "$i", $i);
             $card_list[] = $new_card;
-            $new_card = new Card("$i.jpg", "$i", $i);
+            $new_card = new Card("$i.png", "$i", $i);
             $card_list[] = $new_card;
         }
         shuffle($card_list);
@@ -96,9 +96,9 @@ class Card
         else
             $html .= "<div class=\"card\">";
         if ($this->visibility or $this->getSelected())
-            $html .= "<img src=\"Assets/Images/$this->id.jpg\">";
+            $html .= "<img src=\"Assets/Images/" . $this->getImage() . "\">";
         else
-            $html .= "<img src=\"Assets/Images/card_back.jpg\">";
+            $html .= "<img src=\"Assets/Images/card_back.png\">";
         $html .= "<input type=\"hidden\" name=\"index\" value=\"$index\">";
         if (!$this->visibility)
             $html .= "<input type=\"submit\" class=\"invisibile-submit\" value=\"\">";

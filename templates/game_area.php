@@ -1,6 +1,6 @@
 <div class="card-container">
     <?php
-    if ($gameLogic->checkVictory()) {
+    if (isset($_SESSION['victory'])) {
         include "templates/victory_screen.php";
     } else {
         $index = 0;
