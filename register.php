@@ -1,11 +1,11 @@
 <?php
 require_once "models/Player.php";
-require_once "models/GameLogic.php";
+//require_once "models/GameLogic.php";
 
 if (session_status() === PHP_SESSION_NONE)
     session_start();
 
-include "controllers/index.php";
+include "controllers/auth.php";
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ include "controllers/index.php";
 <?php include "templates/header.php"; ?>
 
 <body><?php
-        include "templates/game_area.php"; ?>
+        include "templates/register.php"; ?>
 </body>
 
 </html>

@@ -28,7 +28,7 @@ class Player
         return $this->id;
     }
 
-    public function create(string $login = '', string $password = '', string $name = ''): Player | bool
+    public static function create(string $login = '', string $password = '', string $name = ''): Player | bool
     {
         $conn = Connection::getConnection();
         $sql = "INSERT INTO players (login, password, name) VALUES (:login, :password, :name)";
@@ -47,6 +47,29 @@ class Player
             return false;
         }
         return new Player((int)$conn->lastInsertId(), $login, $pw_hash, $name, []);
+    }
+
+    public static function connect(string $login = '', string $password = ''): Player | bool
+    {
+        $conn = Connection::getConnection();
+        $sql = "SELECT * FROM players WHERE login=:login";
+        $stmt = $conn->prepare($sql);
+        try {
+            $stmt->execute([
+                ":login" => $login
+            ]);
+            $res = $stmt->fetch();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+
+        if (!$res)
+            return false;
+
+        if (password_verify($password, $res["password"]))
+            return new Player($res['id'], $res['login'], '', $res['name'], []);
+        return false;
     }
 
     public function submitScore(int $score, DateInterval $time, int $nb_pairs = 6): void

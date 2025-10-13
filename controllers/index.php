@@ -1,10 +1,14 @@
 <?php
 
+if (!isset($_SESSION["player"])) {
+    header('Location: login.php');
+}
+
 if (!isset($_SESSION["gameLogic"])) {
-    $player = new Player(1, "Cosmin", "mdp", "Cosmin");
+    //$player = new Player(1, "Cosmin", "mdp", "Cosmin");
+    $player = $_SESSION["player"];
     $gameLogic = new GameLogic($player, 6);
     $_SESSION["gameLogic"] = $gameLogic;
-    $_SESSION["player"] = $player;
 } elseif (isset($_POST["reset"])) {
     session_unset();
     header('Location: index.php');

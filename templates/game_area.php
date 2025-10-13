@@ -11,6 +11,6 @@
     }
     ?>
 </div>
-<form action="index.php" method="post">
+<form action="index.php" method="post" class="options-form">
     <input type="submit" name="reset" value="Redemarrer Partie">
 </form>
