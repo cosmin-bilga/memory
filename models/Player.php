@@ -28,6 +28,11 @@ class Player
         return $this->id;
     }
 
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
     public static function create(string $login = '', string $password = '', string $name = ''): Player | bool
     {
         $conn = Connection::getConnection();

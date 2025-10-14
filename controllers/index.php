@@ -1,10 +1,12 @@
 <?php
 
 if (!isset($_SESSION["player"])) {
+    $_SESSION['flash_message'] = "Veuillez vous connecter";
     header('Location: login.php');
 }
 
 if (isset($_POST["nb_of_pairs"])) {
+    $_SESSION['flash_message'] = "Choissisez le nombre de paires pour votre jeu";
     $_SESSION["nb_of_pairs"] = $_POST["nb_of_pairs"];
 }
 
@@ -16,6 +18,7 @@ if (!isset($_SESSION["gameLogic"])) {
         $gameLogic = new GameLogic($player, 6);
     $_SESSION["gameLogic"] = $gameLogic;
 } elseif (isset($_POST["reset"])) {
+    $_SESSION['flash_message'] = "Nouvelle partie";
     $_SESSION['victory'] = null;
     $_SESSION["gameLogic"] = null;
     header('Location: index.php');
@@ -30,6 +33,8 @@ if (isset($_POST["index"])) {
 }
 
 if (!isset($_SESSION['victory'])) {
-    if ($gameLogic->checkVictory())
+    if ($gameLogic->checkVictory()) {
         $_SESSION['victory'] = True;
+        $_SESSION['flash_message'] = "Vous avez gagné";
+    }
 }

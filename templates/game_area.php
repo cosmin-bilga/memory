@@ -2,7 +2,8 @@
 if (isset($_SESSION["nb_of_pairs"])) { ?>
     <div class="game-area">
         <div class="score-panel">
-            <h3>Actions: </h3>
+            <h5><?php echo $_SESSION["player"]->getName(); ?></h5>
+            <h5>Actions: </h5>
             <p><?php echo $gameLogic->getMoves(); ?></p>
         </div>
         <div class="card-container">
