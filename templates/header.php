@@ -10,4 +10,7 @@
             <a href="login.php?action=disconnect">Déconnexion</a>
         <?php } ?>
     </nav>
+    <?php if (isset($_SESSION['flash_message'])) { ?>
+        <div class="flash-message"><?php echo $_SESSION['flash_message']; ?></div>
+    <?php } ?>
 </header>

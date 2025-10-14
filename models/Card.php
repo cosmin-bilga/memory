@@ -12,6 +12,7 @@ class Card
     private bool $visibility;
     private bool $selected;
 
+
     public function __construct(string $image, string $name, int | null $id = null)
     {
         if ($id === null) {
@@ -74,6 +75,7 @@ class Card
     {
         return $this->selected;
     }
+
 
     public static function generateCards(int $number_of_pairs): array
     {

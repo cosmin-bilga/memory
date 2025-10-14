@@ -11,7 +11,6 @@ if (isset($_POST['register-submit'])) {
     if ($_POST['password'] !== $_POST['password-confirm'])
         header("Location: register.php");
     $player = Player::create($_POST['login'], $_POST['password'], $_POST['name']);
-    //var_dump($player);
     if ($player !== false)
         header("Location: login.php");
     else
