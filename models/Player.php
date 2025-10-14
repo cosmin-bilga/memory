@@ -105,14 +105,13 @@ class Player
         if (count($res) === 0)
             return "<p>Aucun score enregistré dans cette categorie</p>";
 
-        $table = "<table><thead><tr><th>Joueur</th><th>Actions</th><th>Temps</th><th>Nb Pairs</th></tr></thead><tbody>";
+        $table = "<table class=\"score-table\"><thead><tr><th>Joueur</th><th>Actions</th><th>Temps</th></tr></thead><tbody>";
         foreach ($res as $score) {
             //var_dump($score);
             $table .= "<tr>";
             $table .= "<td>" . $score['name'] . "</td>";
             $table .= "<td>" . $score['score'] . "</td>";
             $table .= "<td>" . $score['completion_time'] . "</td>";
-            $table .= "<td>" . $score['number_of_pairs'] . "</td>";
             $table .= "</tr>";
         }
         $table .= "</tbody></table>";
