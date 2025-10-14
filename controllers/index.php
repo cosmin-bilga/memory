@@ -4,13 +4,24 @@ if (!isset($_SESSION["player"])) {
     header('Location: login.php');
 }
 
+
+if (isset($_POST["nb_of_pairs"])) {
+    $_SESSION["nb_of_pairs"] = $_POST["nb_of_pairs"];
+}
+
+
+
+$player = $_SESSION["player"];
 if (!isset($_SESSION["gameLogic"])) {
     //$player = new Player(1, "Cosmin", "mdp", "Cosmin");
-    $player = $_SESSION["player"];
-    $gameLogic = new GameLogic($player, 6);
+    if (isset($_SESSION["nb_of_pairs"]))
+        $gameLogic = new GameLogic($player, $_SESSION["nb_of_pairs"]);
+    else
+        $gameLogic = new GameLogic($player, 6);
     $_SESSION["gameLogic"] = $gameLogic;
 } elseif (isset($_POST["reset"])) {
-    session_unset();
+    $_SESSION['victory'] = null;
+    $_SESSION["gameLogic"] = null;
     header('Location: index.php');
 } else
     $gameLogic = $_SESSION["gameLogic"];

@@ -11,6 +11,6 @@
         <input type="button" name="scoreboard" value="Scoreboard">
     </form> -->
         </h1>
-        <?php echo Player::getHighScores(6); ?>
+        <?php echo Player::getHighScores($_SESSION['nb_of_pairs']); ?>
     </div>
 </div>

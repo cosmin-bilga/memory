@@ -91,25 +91,27 @@ class Player
 
     public function create_score() {}
 
-    public static function getHighScores(int $nb_cards): string
+    public static function getHighScores(int $nb_pairs): string
     {
         $conn = Connection::getConnection();
-        $sql = "SELECT * FROM scores ORDER BY score ASC LIMIT 10";
+        $sql = "SELECT * FROM scores JOIN players ON scores.player_id = players.id WHERE number_of_pairs=:nb_pairs ORDER BY score, completion_time ASC LIMIT 10";
         $stmt = $conn->prepare($sql);
         try {
-            $stmt->execute();
+            $stmt->execute([":nb_pairs" => $nb_pairs]);
         } catch (PDOException $e) {
             echo $e->getMessage();
             return "";
         }
         $res = $stmt->fetchAll();
 
+        if (count($res) === 0)
+            return "<p>Aucun score enregistré dans cette categorie</p>";
 
         $table = "<table><thead><tr><th>Joueur</th><th>Actions</th><th>Temps</th><th>Nb Pairs</th></tr></thead><tbody>";
         foreach ($res as $score) {
             //var_dump($score);
             $table .= "<tr>";
-            $table .= "<td>" . $score['player_id'] . "</td>";
+            $table .= "<td>" . $score['name'] . "</td>";
             $table .= "<td>" . $score['score'] . "</td>";
             $table .= "<td>" . $score['completion_time'] . "</td>";
             $table .= "<td>" . $score['number_of_pairs'] . "</td>";

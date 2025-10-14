@@ -78,7 +78,7 @@ class Card
     public static function generateCards(int $number_of_pairs): array
     {
         $card_list = [];
-        for ($i = 1; $i <= 6; $i++) {
+        for ($i = 1; $i <= $number_of_pairs; $i++) {
             $new_card = new Card("$i.png", "$i", $i);
             $card_list[] = $new_card;
             $new_card = new Card("$i.png", "$i", $i);
