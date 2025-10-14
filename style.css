@@ -21,6 +21,7 @@ header{
     height: 10vh;
     min-height: 50px;
     background-color: rgb(0, 0, 90);
+    align-content: center;
 }
 
 header > nav
