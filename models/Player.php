@@ -38,9 +38,9 @@ class Player
         //echo (password_hash($password, PASSWORD_DEFAULT));
         try {
             $stmt->execute([
-                ":login" => $login,
+                ":login" => htmlentities($login),
                 ":password" => $pw_hash,
-                ":name" => $name
+                ":name" => htmlentities($name)
             ]);
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -88,8 +88,6 @@ class Player
             echo $e->getMessage();
         }
     }
-
-    public function create_score() {}
 
     public static function getHighScores(int $nb_pairs): string
     {

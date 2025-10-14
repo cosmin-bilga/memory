@@ -5,11 +5,7 @@
         <p>Temps requis: <?php echo $gameLogic->getGameTime(); ?></p>
     </div>
     <div class="highscore-panel">
-        <h1>Classement:
-
-            <!-- <form action="index.php" method="post">
-        <input type="button" name="scoreboard" value="Scoreboard">
-    </form> -->
+        <h1>Classement <?php echo $_SESSION['nb_of_pairs']; ?> pairs:
         </h1>
         <?php echo Player::getHighScores($_SESSION['nb_of_pairs']); ?>
     </div>

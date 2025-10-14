@@ -4,16 +4,12 @@ if (!isset($_SESSION["player"])) {
     header('Location: login.php');
 }
 
-
 if (isset($_POST["nb_of_pairs"])) {
     $_SESSION["nb_of_pairs"] = $_POST["nb_of_pairs"];
 }
 
-
-
 $player = $_SESSION["player"];
 if (!isset($_SESSION["gameLogic"])) {
-    //$player = new Player(1, "Cosmin", "mdp", "Cosmin");
     if (isset($_SESSION["nb_of_pairs"]))
         $gameLogic = new GameLogic($player, $_SESSION["nb_of_pairs"]);
     else
@@ -25,10 +21,6 @@ if (!isset($_SESSION["gameLogic"])) {
     header('Location: index.php');
 } else
     $gameLogic = $_SESSION["gameLogic"];
-
-//echo "DEBUG";
-//echo $gameLogic->getSelected();
-//var_dump($_SESSION["gameLogic"]->getCardList());
 
 if (isset($_POST["index"])) {
     if ($gameLogic->getSelected() === -1)

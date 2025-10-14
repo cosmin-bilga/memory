@@ -47,6 +47,7 @@ header a
     margin-top: 5vh;
     display: flex;  
     flex-wrap: wrap;
+    justify-content: space-evenly;
     width: 75vw;
     margin-left: 12.5vw;
     background-color: rgba(240, 248, 255, 0.272);
@@ -148,7 +149,9 @@ input[type=submit]:hover
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    min-height: 200px;
+    min-height: 300px;
+    /* border-bottom: 2px solid whitesmoke;
+    border-top: 2px solid whitesmoke; */
 }
 
 /* HIGHSCORE */
@@ -157,4 +160,39 @@ input[type=submit]:hover
 {
     display: flex;
     flex-wrap: wrap;
+    
+}
+
+.highscore-container > .highscore-panel
+{
+    width: 35%;
+    margin-left: 10vw;
+    outline: 2px solid rgba(245, 245, 245, 0.479);
+}
+
+/* AUTH AREAD */
+
+.auth-div
+{
+    margin:auto;
+    margin-top: 10vh;
+    width: 60vw;
+    height: 60vh;
+    background-color: rgba(245, 245, 245, 0.413);
+    border-radius: 20px;
+}
+
+.auth-div > form
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60vw;
+    height: 60vh;
+}
+
+.auth-div > form > label, .auth-div > form > input[type=submit]
+{
+    margin-top: 10px;
 }

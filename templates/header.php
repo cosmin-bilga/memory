@@ -1,9 +1,13 @@
 <header>
     <nav>
-        <a href="index.php">Home</a>
-        <a href="register.php">Register</a>
-        <a href="login.php">Login</a>
-        <a href="highscores.php">Highscores</a>
-        <a href="login.php?action=disconnect">Disconnect</a>
+        <a href="index.php">Jeu</a>
+        <?php if (!isset($_SESSION['player'])) { ?>
+            <a href="register.php">Inscription</a>
+            <a href="login.php">Connexion</a>
+        <?php } ?>
+        <a href="highscores.php">Meilleurs scores</a>
+        <?php if (isset($_SESSION['player'])) { ?>
+            <a href="login.php?action=disconnect">Déconnexion</a>
+        <?php } ?>
     </nav>
 </header>
