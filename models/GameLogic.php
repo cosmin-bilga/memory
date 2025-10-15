@@ -29,20 +29,22 @@ class GameLogic
         $this->resetSelected();
         $this->card_list[$card_index]->setSelected(true);
         $this->card_selected = $card_index;
+        $this->card_list[$card_index]->setLastSelected(true);
         $this->moves += 1;
     }
 
     public function checkPair(int $card_index): void
     {
-        //var_dump($this->card_list[$card_index]->getId());
-        //var_dump($this->card_list[$this->card_selected]->getId());
         if ($this->card_list[$card_index]->getId() === $this->card_list[$this->card_selected]->getId()) {
             $this->card_list[$card_index]->setVisibility(true);
             $this->card_list[$this->card_selected]->setVisibility(true);
             $this->card_list[$this->card_selected]->setSelected(false);
+            $this->card_list[$card_index]->setLastSelected(true);
         } else {
             $this->card_list[$this->card_selected]->setSelected(true);
+            $this->card_list[$this->card_selected]->setLastSelected(false);
             $this->card_list[$card_index]->setSelected(true);
+            $this->card_list[$card_index]->setLastSelected(true);
         }
         $this->card_selected = -1;
     }
@@ -89,8 +91,10 @@ class GameLogic
 
     public function resetSelected(): void
     {
-        foreach ($this->card_list as $card)
+        foreach ($this->card_list as $card) {
             $card->setSelected(false);
+            $card->setLastSelected(false);
+        }
     }
 
     public function getGameTime(): string

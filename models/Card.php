@@ -11,6 +11,7 @@ class Card
     private string $name;
     private bool $visibility;
     private bool $selected;
+    private bool $last_selected;
 
 
     public function __construct(string $image, string $name, int | null $id = null)
@@ -76,6 +77,16 @@ class Card
         return $this->selected;
     }
 
+    public function setLastSelected(bool $selected): void
+    {
+        $this->last_selected = $selected;
+    }
+
+    public function getLastSelected(): bool
+    {
+        return $this->last_selected;
+    }
+
 
     public static function generateCards(int $number_of_pairs): array
     {
@@ -93,7 +104,9 @@ class Card
     public function toHtml(int $index): string
     {
         $html = "<form action=\"index.php\" method=\"post\">";
-        if ($this->getSelected())
+        if ($this->getSelected() and $this->getLastSelected())
+            $html .= "<div class=\"card last-selected selected\">";
+        elseif ($this->getSelected())
             $html .= "<div class=\"card selected\">";
         else
             $html .= "<div class=\"card\">";

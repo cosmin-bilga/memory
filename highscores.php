@@ -5,7 +5,6 @@ require_once "models/GameLogic.php";
 if (session_status() === PHP_SESSION_NONE)
     session_start();
 
-//include "controllers/index.php";
 ?>
 
 <!DOCTYPE html>
